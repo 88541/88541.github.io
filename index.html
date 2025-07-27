@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>山花终将灿烂导航中心</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  
+  <!-- 配置Tailwind自定义主题 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cyber-black': '#0A0E17',
+            'cyber-blue': '#00F0FF',
+            'cyber-purple': '#9D4EDD',
+            'cyber-pink': '#FF2A6D',
+            'cyber-yellow': '#FFD300',
+            'cyber-green': '#00FF66',
+            'cyber-gray': '#1E293B'
+          },
+          fontFamily: {
+            cyber: ['Orbitron', 'sans-serif']
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+            'value-pulse': 'value-pulse 2s ease-in-out infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            glow: {
+              '0%': { boxShadow: '0 0 5px rgba(0, 240, 255, 0.5), 0 0 10px rgba(0, 240, 255, 0.3)' },
+              '100%': { boxShadow: '0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.5), 0 0 30px rgba(0, 240, 255, 0.3)' }
+            },
+            'value-pulse': {
+              '0%, 100%': { textShadow: '0 0 5px currentColor, 0 0 10px currentColor' },
+              '50%': { textShadow: '0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow-cyber {
+        text-shadow: 0 0 5px rgba(0, 240, 255, 0.7), 0 0 10px rgba(0, 240, 255, 0.5);
+      }
+      .text-shadow-purple {
+        text-shadow: 0 0 5px rgba(157, 78, 221, 0.7), 0 0 10px rgba(157, 78, 221, 0.5);
+      }
+      .text-shadow-pink {
+        text-shadow: 0 0 5px rgba(255, 42, 109, 0.7), 0 0 10px rgba(255, 42, 109, 0.5);
+      }
+      .text-shadow-yellow {
+        text-shadow: 0 0 5px rgba(255, 211, 0, 0.7), 0 0 10px rgba(255, 211, 0, 0.5);
+      }
+      .text-shadow-green {
+        text-shadow: 0 0 5px rgba(0, 255, 102, 0.7), 0 0 10px rgba(0, 255, 102, 0.5);
+      }
+      .bg-grid {
+        background-image: linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+        background-size: 30px 30px;
+      }
+      .border-glow {
+        box-shadow: 0 0 5px rgba(0, 240, 255, 0.5), 0 0 10px rgba(0, 240, 255, 0.3);
+      }
+      .glass-effect {
+        backdrop-filter: blur(8px);
+        background-color: rgba(30, 41, 59, 0.4);
+      }
+      .value-transition {
+        transition: all 0.5s ease-out;
+      }
+    }
+  </style>
+  
+  <!-- 引入字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-cyber-black text-white min-h-screen overflow-x-hidden font-cyber relative">
+  <!-- 粒子背景容器 -->
+  <div id="particles" class="absolute inset-0 z-0"></div>
+  
+  <!-- 网格背景 -->
+  <div class="bg-grid absolute inset-0 z-0 opacity-60"></div>
+  
+  <!-- 顶部装饰线条 -->
+  <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyber-blue via-cyber-purple to-cyber-pink z-10"></div>
+  
+  <!-- 主容器 -->
+  <div class="container mx-auto px-4 py-12 relative z-10">
+    <!-- 标题区域 -->
+    <header class="text-center mb-16 mt-8">
+      <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-cyber-blue text-shadow-cyber mb-2 tracking-wider">
+        山花<span class="text-cyber-purple text-shadow-purple">终将灿烂</span>
+      </h1>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+        <span class="inline-block animate-pulse-slow">●</span> 探索娱乐领域的核心入口
+      </p>
+      
+      <!-- 装饰性进度条 -->
+      <div class="w-32 h-1 bg-cyber-gray mt-6 mx-auto overflow-hidden rounded-full">
+        <div class="h-full bg-gradient-to-r from-cyber-blue to-cyber-purple w-3/4 rounded-full"></div>
+      </div>
+    </header>
+    
+    <!-- 导航网格 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <!-- 导航项1 -->
+      <div class="group relative overflow-hidden rounded-lg border border-cyber-blue/30 hover:border-cyber-blue transition-all duration-300 animate-float glass-effect hover:animate-glow" style="animation-delay: 0s">
+        <div class="absolute top-0 left-0 w-full h-1 bg-cyber-blue"></div>
+        <div class="p-8 relative z-10 h-full flex flex-col">
+          <div class="text-cyber-blue text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">
+            <i class="fa fa-rocket"></i>
+          </div>
+          <h2 class="text-2xl font-bold mb-3 text-cyber-blue text-shadow-cyber">MoonTV1官网：密碼123</h2>
+          <p class="text-gray-300 mb-6 flex-grow">探索视频领域，纵享奇妙之旅</p>
+          <!-- 访问视频库链接 - 在新页面打开 -->
+          <a href="https://wwsh.vvvv.ee" target="_blank" rel="noopener noreferrer" class="mt-auto pt-4 border-t border-cyber-blue/20 flex justify-between items-center">
+            <span class="text-sm text-cyber-blue/80">访问视频库</span>
+            <i class="fa fa-arrow-right text-cyber-blue transition-transform duration-300 group-hover:translate-x-2"></i>
+          </a>
+        </div>
+        <!-- 背景装饰 -->
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyber-blue/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-cyber-blue/20"></div>
+      </div>
+      
+      <!-- 导航项2 -->
+      <div class="group relative overflow-hidden rounded-lg border border-cyber-purple/30 hover:border-cyber-purple transition-all duration-300 animate-float glass-effect hover:animate-glow" style="animation-delay: 0.2s">
+        <div class="absolute top-0 left-0 w-full h-1 bg-cyber-purple"></div>
+        <div class="p-8 relative z-10 h-full flex flex-col">
+          <div class="text-cyber-purple text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">
+            <i class="fa fa-microchip"></i>
+          </div>
+          <h2 class="text-2xl font-bold mb-3 text-cyber-purple text-shadow-purple">MoonTV官网2</h2>
+          <p class="text-gray-300 mb-6 flex-grow">探索视频领域，纵享视觉之旅</p>
+          <!-- 访问视频台链接 - 在新页面打开 -->
+          <a href="https://wwsh2.dpdns.org" target="_blank" rel="noopener noreferrer" class="mt-auto pt-4 border-t border-cyber-purple/20 flex justify-between items-center">
+            <span class="text-sm text-cyber-purple/80">访问视频台</span>
+            <i class="fa fa-arrow-right text-cyber-purple transition-transform duration-300 group-hover:translate-x-2"></i>
+          </a>
+        </div>
+        <!-- 背景装饰 -->
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyber-purple/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-cyber-purple/20"></div>
+      </div>
+      
+      <!-- 导航项3 -->
+      <div class="group relative overflow-hidden rounded-lg border border-cyber-pink/30 hover:border-cyber-pink transition-all duration-300 animate-float glass-effect hover:animate-glow" style="animation-delay: 0.4s">
+        <div class="absolute top-0 left-0 w-full h-1 bg-cyber-pink"></div>
+        <div class="p-8 relative z-10 h-full flex flex-col">
+          <div class="text-cyber-pink text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">
+            <i class="fa fa-brain"></i>
+          </div>
+          <h2 class="text-2xl font-bold mb-3 text-cyber-pink text-shadow-pink">龙珠音乐播放器官网1</h2>
+          <p class="text-gray-300 mb-6 flex-grow">探索音乐领域，纵享听觉之旅</p>
+          <!-- 访问音乐中枢链接 - 在新页面打开 -->
+          <a href="https://wwsh.wuaze.com" target="_blank" rel="noopener noreferrer" class="mt-auto pt-4 border-t border-cyber-pink/20 flex justify-between items-center">
+            <span class="text-sm text-cyber-pink/80">访问音乐中枢</span>
+            <i class="fa fa-arrow-right text-cyber-pink transition-transform duration-300 group-hover:translate-x-2"></i>
+          </a>
+        </div>
+        <!-- 背景装饰 -->
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyber-pink/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-cyber-pink/20"></div>
+      </div>
+      
+      <!-- 导航项4 -->
+      <div class="group relative overflow-hidden rounded-lg border border-cyber-yellow/30 hover:border-cyber-yellow transition-all duration-300 animate-float glass-effect hover:animate-glow" style="animation-delay: 0.6s">
+        <div class="absolute top-0 left-0 w-full h-1 bg-cyber-yellow"></div>
+        <div class="p-8 relative z-10 h-full flex flex-col">
+          <div class="text-cyber-yellow text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">
+            <i class="fa fa-shield-alt"></i>
+          </div>
+          <h2 class="text-2xl font-bold mb-3 text-cyber-yellow text-shadow-yellow">龙珠音乐播放器官网2</h2>
+          <p class="text-gray-300 mb-6 flex-grow">探索音乐领域，纵享听觉之旅</p>
+          <!-- 访问音乐中心链接 - 在新页面打开 -->
+          <a href="https://wwsh.imvip.vip" target="_blank" rel="noopener noreferrer" class="mt-auto pt-4 border-t border-cyber-yellow/20 flex justify-between items-center">
+            <span class="text-sm text-cyber-yellow/80">访问音乐中心</span>
+            <i class="fa fa-arrow-right text-cyber-yellow transition-transform duration-300 group-hover:translate-x-2"></i>
+          </a>
+        </div>
+        <!-- 背景装饰 -->
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyber-yellow/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-cyber-yellow/20"></div>
+      </div>
+    </div>
+    
+    <!-- 状态监控面板 -->
+    <div class="mt-16 max-w-5xl mx-auto glass-effect rounded-lg border border-cyber-blue/20 p-6">
+      <h3 class="text-xl font-semibold text-cyber-blue mb-4 flex items-center">
+        <i class="fa fa-tachometer mr-2"></i>系统状态监控
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+        <div class="p-3 bg-cyber-gray/50 rounded border border-cyber-blue/10">
+          <div class="text-sm text-gray-400">系统负载</div>
+          <div class="text-lg font-bold text-cyber-blue animate-value-pulse value-transition" id="systemLoad">0%</div>
+        </div>
+        <div class="p-3 bg-cyber-gray/50 rounded border border-cyber-purple/10">
+          <div class="text-sm text-gray-400">网络速度</div>
+          <div class="text-lg font-bold text-cyber-purple animate-value-pulse value-transition" id="networkSpeed">0.0 Gbps</div>
+        </div>
+        <div class="p-3 bg-cyber-gray/50 rounded border border-cyber-pink/10">
+          <div class="text-sm text-gray-400">连接设备</div>
+          <div class="text-lg font-bold text-cyber-pink animate-value-pulse value-transition" id="connectedDevices">0</div>
+        </div>
+        <div class="p-3 bg-cyber-gray/50 rounded border border-cyber-green/10">
+          <div class="text-sm text-gray-400">安全指数</div>
+          <div class="text-lg font-bold text-cyber-green text-shadow-green animate-value-pulse value-transition" id="securityIndex">0%</div>
+        </div>
+      </div>
+      
+      <!-- 简单图表 -->
+      <div class="h-24">
+        <canvas id="statusChart"></canvas>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部信息 -->
+  <footer class="mt-16 py-6 border-t border-cyber-blue/10 relative z-10">
+    <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+      <p>© 2077 山花终将灿烂导航系统 | 系统版本 4.8.2</p>
+      <p class="mt-2">最后更新: <span class="text-cyber-blue">2077-06-15 08:42:19</span></p>
+    </div>
+  </footer>
+
+  <!-- 粒子效果和交互脚本 -->
+  <script>
+    // 存储当前数值的变量
+    let currentLoad = 0;
+    let currentSpeed = 0;
+    let currentDevices = 0;
+    let statusChart = null;
+    
+    // 创建数值增长动画
+    function animateValue(id, start, end, duration, suffix = '', isFloat = false, decimalPlaces = 1) {
+      const obj = document.getElementById(id);
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        
+        // 根据是否为浮点数计算当前值
+        let currentValue;
+        if (isFloat) {
+          currentValue = start + progress * (end - start);
+          currentValue = currentValue.toFixed(decimalPlaces);
+        } else {
+          currentValue = Math.floor(start + progress * (end - start));
+        }
+        
+        // 添加千位分隔符（仅对整数）
+        if (!isFloat && id === 'connectedDevices') {
+          obj.textContent = currentValue.toLocaleString() + suffix;
+        } else {
+          obj.textContent = currentValue + suffix;
+        }
+        
+        // 更新当前值存储
+        if (progress === 1) {
+          if (id === 'systemLoad') currentLoad = end;
+          if (id === 'networkSpeed') currentSpeed = end;
+          if (id === 'connectedDevices') currentDevices = end;
+        }
+        
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+    
+    // 生成新的随机值（基于当前值小幅波动）
+    function getNewValue(current, min, max,波动范围百分比) {
+      // 计算波动范围
+      const range = (max - min) * 波动范围百分比;
+      // 生成新值（在当前值±波动范围内）
+      let newValue = current + (Math.random() * range * 2 - range);
+      // 确保新值在有效范围内
+      return Math.max(min, Math.min(max, newValue));
+    }
+    
+    // 更新所有状态数值
+    function updateAllValues() {
+      // 系统负载：10-80之间，基于当前值±10%波动
+      const newLoad = Math.floor(getNewValue(currentLoad, 10, 80, 0.1));
+      animateValue('systemLoad', currentLoad, newLoad, 1500, '%');
+      
+      // 网络速度：0.5-2.5之间，基于当前值±15%波动
+      const newSpeed = parseFloat(getNewValue(currentSpeed, 0.5, 2.5, 0.15).toFixed(1));
+      animateValue('networkSpeed', currentSpeed, newSpeed, 1800, ' Gbps', true);
+      
+      // 连接设备：100-100000之间，基于当前值±5%波动
+      const newDevices = Math.floor(getNewValue(currentDevices, 100, 100000, 0.05));
+      animateValue('connectedDevices', currentDevices, newDevices, 2200);
+      
+      // 更新图表数据
+      updateChartData(newLoad);
+    }
+    
+    // 更新图表数据
+    function updateChartData(newLoad) {
+      if (statusChart) {
+        // 移除第一个数据点，添加新数据点
+        statusChart.data.datasets[0].data.shift();
+        statusChart.data.datasets[0].data.push(newLoad);
+        statusChart.update();
+      }
+    }
+
+    // 创建粒子背景效果
+    document.addEventListener('DOMContentLoaded', () => {
+      // 初始化随机数值
+      const initialLoad = Math.floor(Math.random() * 71) + 10; // 10-80的随机整数
+      const initialSpeed = parseFloat((Math.random() * 2 + 0.5).toFixed(1)); // 0.5-2.5的随机小数
+      const initialDevices = Math.floor(Math.random() * 99900) + 100; // 100-100000的随机整数
+      const securityIndex = 100; // 安全指数固定为100%
+      
+      // 设置初始值
+      currentLoad = initialLoad;
+      currentSpeed = initialSpeed;
+      currentDevices = initialDevices;
+      
+      // 初始动画
+      setTimeout(() => {
+        animateValue('systemLoad', 0, initialLoad, 1500, '%');
+      }, 300);
+      
+      setTimeout(() => {
+        animateValue('networkSpeed', 0, initialSpeed, 1800, ' Gbps', true);
+      }, 600);
+      
+      setTimeout(() => {
+        animateValue('connectedDevices', 0, initialDevices, 2200);
+      }, 900);
+      
+      setTimeout(() => {
+        animateValue('securityIndex', 0, securityIndex, 1600, '%');
+      }, 500);
+      
+      // 创建粒子
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        
+        // 随机属性
+        const size = Math.random() * 3 + 1;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const duration = Math.random() * 30 + 20;
+        const delay = Math.random() * 10;
+        const opacity = Math.random() * 0.5 + 0.1;
+        
+        // 随机颜色
+        const colors = ['rgba(0, 240, 255, opacity)', 'rgba(157, 78, 221, opacity)', 'rgba(255, 42, 109, opacity)', 'rgba(0, 255, 102, opacity)'];
+        const color = colors[Math.floor(Math.random() * colors.length)].replace('opacity', opacity);
+        
+        // 设置样式
+        particle.style.cssText = `
+          position: absolute;
+          width: ${size}px;
+          height: ${size}px;
+          background: ${color};
+          border-radius: 50%;
+          top: ${posY}%;
+          left: ${posX}%;
+          box-shadow: 0 0 ${size * 3}px ${color};
+          animation: float ${duration}s linear ${delay}s infinite;
+          z-index: 0;
+        `;
+        
+        particlesContainer.appendChild(particle);
+      }
+      
+      // 创建状态图表
+      const ctx = document.getElementById('statusChart').getContext('2d');
+      const initialChartData = Array.from({length: 24}, () => Math.floor(Math.random() * 71) + 10);
+      
+      statusChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: Array(24).fill(''),
+          datasets: [{
+            label: '系统负载',
+            data: initialChartData,
+            borderColor: 'rgba(0, 240, 255, 0.8)',
+            backgroundColor: 'rgba(0, 240, 255, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            x: { display: false },
+            y: { display: false, min: 0, max: 100 }
+          },
+          elements: {
+            point: { radius: 0 }
+          },
+          animation: {
+            duration: 2000,
+            easing: 'easeOutQuart'
+          }
+        }
+      });
+      
+      // 设置定时器，每7秒更新一次数值
+      setInterval(updateAllValues, 7000);
+    });
+  </script>
+</body>
+</html>
