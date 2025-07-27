@@ -1,1 +1,386 @@
-Hello, world!
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山河终将灿烂</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Ma+Shan+Zheng&display=swap');
+        
+        :root {
+            --primary-color: #ff4d4d;
+            --secondary-color: #ffcc00;
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --accent-color: #4dffb8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Ma Shan Zheng', cursive;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 77, 77, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(77, 255, 184, 0.1) 0%, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: var(--opacity); }
+        }
+        
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+            position: relative;
+            display: inline-block;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+            }
+            to {
+                text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+            }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+            opacity: 0.8;
+        }
+        
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .nav-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .nav-item a {
+            display: block;
+            padding: 1.5rem;
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-item a:hover {
+            background: rgba(40, 40, 40, 0.9);
+            border-color: var(--primary-color);
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 77, 77, 0.2),
+                rgba(77, 255, 184, 0.2),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .nav-item:hover::before {
+            animation: shine 1.5s;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -50%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                left: 150%;
+                opacity: 0;
+            }
+        }
+        
+        .mountain-background {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            z-index: -1;
+            background: linear-gradient(to top, rgba(18, 18, 18, 1) 0%, transparent 100%);
+        }
+        
+        .mountain {
+            position: absolute;
+            bottom: 0;
+            height: 100px;
+            background: linear-gradient(to top, #1a1a1a 0%, #333 100%);
+            border-radius: 50% 50% 0 0;
+            animation: mountainMove 20s infinite alternate ease-in-out;
+        }
+        
+        .mountain:nth-child(1) {
+            left: 0;
+            width: 300px;
+            height: 120px;
+            animation-delay: 0s;
+        }
+        
+        .mountain:nth-child(2) {
+            left: 200px;
+            width: 250px;
+            height: 100px;
+            animation-delay: -2s;
+        }
+        
+        .mountain:nth-child(3) {
+            right: 100px;
+            width: 350px;
+            height: 150px;
+            animation-delay: -5s;
+        }
+        
+        .mountain:nth-child(4) {
+            right: 0;
+            width: 200px;
+            height: 80px;
+            animation-delay: -7s;
+        }
+        
+        @keyframes mountainMove {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .floating-text {
+            position: absolute;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.3);
+            animation: float 15s infinite linear;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-item a {
+                padding: 1rem;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <h1>山河终将灿烂</h1>
+        <div class="subtitle">璀璨星河，指引前行</div>
+        
+        <div class="nav-links">
+            <div class="nav-item">
+                <a href="https://wwsh.vvvv.ee" target="_blank">MnnoTV</a>
+            </div>
+            <div class="nav-item">
+                <a href="https://wwsh.wuaze.com" target="_blank">龙珠音乐</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mountain-background">
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+        <div class="mountain"></div>
+    </div>
+    
+    <footer>
+        © 2025 山河终将灿烂 · 导航页
+    </footer>
+    
+    <script>
+        // 创建星星背景
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // 随机大小
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // 随机位置
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // 随机动画参数
+                const duration = 2 + Math.random() * 3;
+                const delay = Math.random() * 5;
+                const opacity = 0.5 + Math.random() * 0.5;
+                
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.setProperty('--opacity', opacity);
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // 创建浮动文字
+        function createFloatingText() {
+            const texts = ["山河", "灿烂", "星辰", "大海", "梦想", "远方", "光芒", "永恒"];
+            const container = document.body;
+            
+            setInterval(() => {
+                const text = document.createElement('div');
+                text.classList.add('floating-text');
+                text.textContent = texts[Math.floor(Math.random() * texts.length)];
+                
+                // 随机位置
+                text.style.left = `${10 + Math.random() * 80}%`;
+                text.style.bottom = `-20px`;
+                
+                // 随机动画时间
+                const duration = 10 + Math.random() * 20;
+                text.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(text);
+                
+                // 动画结束后移除元素
+                setTimeout(() => {
+                    text.remove();
+                }, duration * 1000);
+            }, 1000);
+        }
+        
+        // 初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createFloatingText();
+        });
+    </script>
+</body>
+</html>
