@@ -25,437 +25,296 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>山花终将灿烂导航中心</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-  
-  <!-- 配置Tailwind自定义主题 -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'cyber-black': '#0A0E17',
-            'cyber-blue': '#00F0FF',
-            'cyber-purple': '#9D4EDD',
-            'cyber-pink': '#FF2A6D',
-            'cyber-yellow': '#FFD300',
-            'cyber-green': '#00FF66',
-            'cyber-gray': '#1E293B'
-          },
-          fontFamily: {
-            cyber: ['Orbitron', 'sans-serif']
-          },
-          animation: {
-            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'float': 'float 6s ease-in-out infinite',
-            'glow': 'glow 2s ease-in-out infinite alternate',
-            'value-pulse': 'value-pulse 2s ease-in-out infinite'
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-10px)' }
-            },
-            glow: {
-              '0%': { boxShadow: '0 0 5px rgba(0, 240, 255, 0.5), 0 0 10px rgba(0, 240, 255, 0.3)' },
-              '100%': { boxShadow: '0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.5), 0 0 30px rgba(0, 240, 255, 0.3)' }
-            },
-            'value-pulse': {
-              '0%, 100%': { textShadow: '0 0 5px currentColor, 0 0 10px currentColor' },
-              '50%': { textShadow: '0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor' }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工人阶级万岁导航中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 配置Tailwind自定义颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-black': '#0D0221',
+                        'cyber-blue': '#00F0FF',
+                        'cyber-purple': '#9D4EDD',
+                        'cyber-pink': '#FF2A6D',
+                        'cyber-yellow': '#FFD300',
+                    },
+                    fontFamily: {
+                        'cyber': ['Orbitron', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { 'box-shadow': '0 0 5px rgba(0, 240, 255, 0.5), 0 0 10px rgba(0, 240, 255, 0.3)' },
+                            '100%': { 'box-shadow': '0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.6), 0 0 30px rgba(0, 240, 255, 0.4)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  </script>
-  
-  <!-- 自定义工具类 -->
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .text-shadow-cyber {
-        text-shadow: 0 0 5px rgba(0, 240, 255, 0.7), 0 0 10px rgba(0, 240, 255, 0.5);
-      }
-      .text-shadow-purple {
-        text-shadow: 0 0 5px rgba(157, 78, 221, 0.7), 0 0 10px rgba(157, 78, 221, 0.5);
-      }
-      .text-shadow-pink {
-        text-shadow: 0 0 5px rgba(255, 42, 109, 0.7), 0 0 10px rgba(255, 42, 109, 0.5);
-      }
-      .text-shadow-yellow {
-        text-shadow: 0 0 5px rgba(255, 211, 0, 0.7), 0 0 10px rgba(255, 211, 0, 0.5);
-      }
-      .text-shadow-green {
-        text-shadow: 0 0 5px rgba(0, 255, 102, 0.7), 0 0 10px rgba(0, 255, 102, 0.5);
-      }
-      .bg-grid {
-        background-image: linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
-        background-size: 30px 30px;
-      }
-      .border-glow {
-        box-shadow: 0 0 5px rgba(0, 240, 255, 0.5), 0 0 10px rgba(0, 240, 255, 0.3);
-      }
-      .glass-effect {
-        backdrop-filter: blur(8px);
-        background-color: rgba(30, 41, 59, 0.4);
-      }
-      .value-transition {
-        transition: all 0.5s ease-out;
-      }
-    }
-  </style>
-  
-  <!-- 引入字体 -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </script>
+    
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow-cyber {
+                text-shadow: 0 0 5px rgba(0, 240, 255, 0.7), 0 0 10px rgba(0, 240, 255, 0.5);
+            }
+            .text-shadow-purple {
+                text-shadow: 0 0 5px rgba(157, 78, 221, 0.7), 0 0 10px rgba(157, 78, 221, 0.5);
+            }
+            .border-glow {
+                box-shadow: 0 0 5px rgba(0, 240, 255, 0.7), 0 0 10px rgba(0, 240, 255, 0.5);
+            }
+            .grid-bg {
+                background-image: 
+                    linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+            .clip-polygon {
+                clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+            }
+        }
+    </style>
+    
+    <!-- 引入字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-cyber-black text-white min-h-screen overflow-x-hidden font-cyber relative">
-  <!-- 粒子背景容器 -->
-  <div id="particles" class="absolute inset-0 z-0"></div>
-  
-  <!-- 网格背景 -->
-  <div class="bg-grid absolute inset-0 z-0 opacity-60"></div>
-  
-  <!-- 顶部装饰线条 -->
-  <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyber-blue via-cyber-purple to-cyber-pink z-10"></div>
-  
-  <!-- 主容器 -->
-  <div class="container mx-auto px-4 py-12 relative z-10">
-    <!-- 标题区域 -->
-    <header class="text-center mb-16 mt-8">
-      <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-cyber-blue text-shadow-cyber mb-2 tracking-wider">
-        山花<span class="text-cyber-purple text-shadow-purple">终将灿烂</span>
-      </h1>
-      <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-        <span class="inline-block animate-pulse-slow">●</span> 探索娱乐领域的核心入口
-      </p>
-      
-      <!-- 装饰性进度条 -->
-      <div class="w-32 h-1 bg-cyber-gray mt-6 mx-auto overflow-hidden rounded-full">
-        <div class="h-full bg-gradient-to-r from-cyber-blue to-cyber-purple w-3/4 rounded-full"></div>
-      </div>
-    </header>
-    
-    <!-- 导航网格 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-      <!-- 导航项1 -->
-      <div class="group relative overflow-hidden rounded-lg border border-cyber-blue/30 hover:border-cyber-blue transition-all duration-300 animate-float glass-effect hover:animate-glow" style="animation-delay: 0s">
-        <div class="absolute top-0 left-0 w-full h-1 bg-cyber-blue"></div>
-        <div class="p-8 relative z-10 h-full flex flex-col">
-          <div class="text-cyber-blue text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">
-            <i class="fa fa-rocket"></i>
-          </div>
-          <h2 class="text-2xl font-bold mb-3 text-cyber-blue text-shadow-cyber">MoonTV1官网：密碼123</h2>
-          <p class="text-gray-300 mb-6 flex-grow">探索视频领域，纵享奇妙之旅</p>
-          <!-- 访问视频库链接 - 在新页面打开 -->
-          <a href="https://wwsh.vvvv.ee" target="_blank" rel="noopener noreferrer" class="mt-auto pt-4 border-t border-cyber-blue/20 flex justify-between items-center">
-            <span class="text-sm text-cyber-blue/80">访问视频库</span>
-            <i class="fa fa-arrow-right text-cyber-blue transition-transform duration-300 group-hover:translate-x-2"></i>
-          </a>
-        </div>
-        <!-- 背景装饰 -->
-        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyber-blue/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-cyber-blue/20"></div>
-      </div>
-      
-      <!-- 导航项2 -->
-      <div class="group relative overflow-hidden rounded-lg border border-cyber-purple/30 hover:border-cyber-purple transition-all duration-300 animate-float glass-effect hover:animate-glow" style="animation-delay: 0.2s">
-        <div class="absolute top-0 left-0 w-full h-1 bg-cyber-purple"></div>
-        <div class="p-8 relative z-10 h-full flex flex-col">
-          <div class="text-cyber-purple text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">
-            <i class="fa fa-microchip"></i>
-          </div>
-          <h2 class="text-2xl font-bold mb-3 text-cyber-purple text-shadow-purple">MoonTV官网2</h2>
-          <p class="text-gray-300 mb-6 flex-grow">探索视频领域，纵享视觉之旅</p>
-          <!-- 访问视频台链接 - 在新页面打开 -->
-          <a href="https://wwsh2.dpdns.org" target="_blank" rel="noopener noreferrer" class="mt-auto pt-4 border-t border-cyber-purple/20 flex justify-between items-center">
-            <span class="text-sm text-cyber-purple/80">访问视频台</span>
-            <i class="fa fa-arrow-right text-cyber-purple transition-transform duration-300 group-hover:translate-x-2"></i>
-          </a>
-        </div>
-        <!-- 背景装饰 -->
-        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyber-purple/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-cyber-purple/20"></div>
-      </div>
-      
-      <!-- 导航项3 -->
-      <div class="group relative overflow-hidden rounded-lg border border-cyber-pink/30 hover:border-cyber-pink transition-all duration-300 animate-float glass-effect hover:animate-glow" style="animation-delay: 0.4s">
-        <div class="absolute top-0 left-0 w-full h-1 bg-cyber-pink"></div>
-        <div class="p-8 relative z-10 h-full flex flex-col">
-          <div class="text-cyber-pink text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">
-            <i class="fa fa-brain"></i>
-          </div>
-          <h2 class="text-2xl font-bold mb-3 text-cyber-pink text-shadow-pink">龙珠音乐播放器官网1</h2>
-          <p class="text-gray-300 mb-6 flex-grow">探索音乐领域，纵享听觉之旅</p>
-          <!-- 访问音乐中枢链接 - 在新页面打开 -->
-          <a href="http://wwsh1.vvvv.ee" target="_blank" rel="noopener noreferrer" class="mt-auto pt-4 border-t border-cyber-pink/20 flex justify-between items-center">
-            <span class="text-sm text-cyber-pink/80">访问音乐中枢</span>
-            <i class="fa fa-arrow-right text-cyber-pink transition-transform duration-300 group-hover:translate-x-2"></i>
-          </a>
-        </div>
-        <!-- 背景装饰 -->
-        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyber-pink/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-cyber-pink/20"></div>
-      </div>
-      
-      <!-- 导航项4 -->
-      <div class="group relative overflow-hidden rounded-lg border border-cyber-yellow/30 hover:border-cyber-yellow transition-all duration-300 animate-float glass-effect hover:animate-glow" style="animation-delay: 0.6s">
-        <div class="absolute top-0 left-0 w-full h-1 bg-cyber-yellow"></div>
-        <div class="p-8 relative z-10 h-full flex flex-col">
-          <div class="text-cyber-yellow text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">
-            <i class="fa fa-shield-alt"></i>
-          </div>
-          <h2 class="text-2xl font-bold mb-3 text-cyber-yellow text-shadow-yellow">龙珠音乐播放器官网2</h2>
-          <p class="text-gray-300 mb-6 flex-grow">探索音乐领域，纵享听觉之旅</p>
-          <!-- 访问音乐中心链接 - 在新页面打开 -->
-          <a href="https://wwsh.imvip.vip" target="_blank" rel="noopener noreferrer" class="mt-auto pt-4 border-t border-cyber-yellow/20 flex justify-between items-center">
-            <span class="text-sm text-cyber-yellow/80">访问音乐中心</span>
-            <i class="fa fa-arrow-right text-cyber-yellow transition-transform duration-300 group-hover:translate-x-2"></i>
-          </a>
-        </div>
-        <!-- 背景装饰 -->
-        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyber-yellow/10 rounded-full blur-3xl transition-all duration-500 group-hover:bg-cyber-yellow/20"></div>
-      </div>
+<body class="bg-cyber-black text-gray-200 min-h-screen grid-bg overflow-x-hidden">
+    <!-- 装饰性网格和线条 -->
+    <div class="fixed inset-0 pointer-events-none opacity-20">
+        <div class="absolute top-1/4 left-0 w-full h-px bg-cyber-blue"></div>
+        <div class="absolute top-2/4 left-0 w-full h-px bg-cyber-blue"></div>
+        <div class="absolute top-3/4 left-0 w-full h-px bg-cyber-blue"></div>
+        <div class="absolute top-0 left-1/4 w-px h-full bg-cyber-blue"></div>
+        <div class="absolute top-0 left-2/4 w-px h-full bg-cyber-blue"></div>
+        <div class="absolute top-0 left-3/4 w-px h-full bg-cyber-blue"></div>
     </div>
-    
-    <!-- 状态监控面板 -->
-    <div class="mt-16 max-w-5xl mx-auto glass-effect rounded-lg border border-cyber-blue/20 p-6">
-      <h3 class="text-xl font-semibold text-cyber-blue mb-4 flex items-center">
-        <i class="fa fa-tachometer mr-2"></i>系统状态监控
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-        <div class="p-3 bg-cyber-gray/50 rounded border border-cyber-blue/10">
-          <div class="text-sm text-gray-400">系统负载</div>
-          <div class="text-lg font-bold text-cyber-blue animate-value-pulse value-transition" id="systemLoad">0%</div>
-        </div>
-        <div class="p-3 bg-cyber-gray/50 rounded border border-cyber-purple/10">
-          <div class="text-sm text-gray-400">网络速度</div>
-          <div class="text-lg font-bold text-cyber-purple animate-value-pulse value-transition" id="networkSpeed">0.0 Gbps</div>
-        </div>
-        <div class="p-3 bg-cyber-gray/50 rounded border border-cyber-pink/10">
-          <div class="text-sm text-gray-400">连接设备</div>
-          <div class="text-lg font-bold text-cyber-pink animate-value-pulse value-transition" id="connectedDevices">0</div>
-        </div>
-        <div class="p-3 bg-cyber-gray/50 rounded border border-cyber-green/10">
-          <div class="text-sm text-gray-400">安全指数</div>
-          <div class="text-lg font-bold text-cyber-green text-shadow-green animate-value-pulse value-transition" id="securityIndex">0%</div>
-        </div>
-      </div>
-      
-      <!-- 简单图表 -->
-      <div class="h-24">
-        <canvas id="statusChart"></canvas>
-      </div>
-    </div>
-  </div>
-  
-  <!-- 引入音乐播放器 -->
-  <div id="xf-MusicPlayer" data-cdnName="https://player.xfyun.club/js"  data-themeColor="xf-girlPink" data-bottomHeight="3em" data-songChart="热歌榜"data-fadeOutAutoplay data-memory="1" data-random="true" data-randomSongList="1"></div>
-  <script src="https://player.xfyun.club/js/xf-MusicPlayer/js/xf-MusicPlayer.min.js"></script>
-  <script src="https://player.xfyun.club/js/yinghua.js"></script>
-  
-  <!-- 底部信息 -->
-  <footer class="mt-16 py-6 border-t border-cyber-blue/10 relative z-10">
-    <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
-      <p>© 2077 山花终将灿烂导航系统 | 系统版本 4.8.2</p>
-      <p class="mt-2">最后更新: <span class="text-cyber-blue">2077-06-15 08:42:19</span></p>
-    </div>
-  </footer>
 
-  <!-- 粒子效果和交互脚本 -->
-  <script>
-    // 存储当前数值的变量
-    let currentLoad = 0;
-    let currentSpeed = 0;
-    let currentDevices = 0;
-    let statusChart = null;
-    
-    // 创建数值增长动画
-    function animateValue(id, start, end, duration, suffix = '', isFloat = false, decimalPlaces = 1) {
-      const obj = document.getElementById(id);
-      let startTimestamp = null;
-      const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        
-        // 根据是否为浮点数计算当前值
-        let currentValue;
-        if (isFloat) {
-          currentValue = start + progress * (end - start);
-          currentValue = currentValue.toFixed(decimalPlaces);
-        } else {
-          currentValue = Math.floor(start + progress * (end - start));
-        }
-        
-        // 添加千位分隔符（仅对整数）
-        if (!isFloat && id === 'connectedDevices') {
-          obj.textContent = currentValue.toLocaleString() + suffix;
-        } else {
-          obj.textContent = currentValue + suffix;
-        }
-        
-        // 更新当前值存储
-        if (progress === 1) {
-          if (id === 'systemLoad') currentLoad = end;
-          if (id === 'networkSpeed') currentSpeed = end;
-          if (id === 'connectedDevices') currentDevices = end;
-        }
-        
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
-      };
-      window.requestAnimationFrame(step);
-    }
-    
-    // 生成新的随机值（基于当前值小幅波动）
-    function getNewValue(current, min, max,波动范围百分比) {
-      // 计算波动范围
-      const range = (max - min) * 波动范围百分比;
-      // 生成新值（在当前值±波动范围内）
-      let newValue = current + (Math.random() * range * 2 - range);
-      // 确保新值在有效范围内
-      return Math.max(min, Math.min(max, newValue));
-    }
-    
-    // 更新所有状态数值
-    function updateAllValues() {
-      // 系统负载：10-80之间，基于当前值±10%波动
-      const newLoad = Math.floor(getNewValue(currentLoad, 10, 80, 0.1));
-      animateValue('systemLoad', currentLoad, newLoad, 1500, '%');
-      
-      // 网络速度：0.5-2.5之间，基于当前值±15%波动
-      const newSpeed = parseFloat(getNewValue(currentSpeed, 0.5, 2.5, 0.15).toFixed(1));
-      animateValue('networkSpeed', currentSpeed, newSpeed, 1800, ' Gbps', true);
-      
-      // 连接设备：100-100000之间，基于当前值±5%波动
-      const newDevices = Math.floor(getNewValue(currentDevices, 100, 100000, 0.05));
-      animateValue('connectedDevices', currentDevices, newDevices, 2200);
-      
-      // 更新图表数据
-      updateChartData(newLoad);
-    }
-    
-    // 更新图表数据
-    function updateChartData(newLoad) {
-      if (statusChart) {
-        // 移除第一个数据点，添加新数据点
-        statusChart.data.datasets[0].data.shift();
-        statusChart.data.datasets[0].data.push(newLoad);
-        statusChart.update();
-      }
-    }
+    <!-- 页面容器 -->
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <!-- 标题区域 -->
+        <header class="text-center mb-16 animate-float">
+            <h1 class="text-[clamp(2rem,5vw,4rem)] font-cyber font-bold text-cyber-blue text-shadow-cyber mb-2">
+                工人<span class="text-cyber-pink">阶级万岁</span>
+            </h1>
+            <p class="text-gray-400 text-lg max-w-lg mx-auto border-l-2 border-r-2 border-cyber-purple px-4 py-2">
+                探索娱乐领域的核心入口
+            </p>
+        </header>
 
-    // 创建粒子背景效果
-    document.addEventListener('DOMContentLoaded', () => {
-      // 初始化随机数值
-      const initialLoad = Math.floor(Math.random() * 71) + 10; // 10-80的随机整数
-      const initialSpeed = parseFloat((Math.random() * 2 + 0.5).toFixed(1)); // 0.5-2.5的随机小数
-      const initialDevices = Math.floor(Math.random() * 99900) + 100; // 100-100000的随机整数
-      const securityIndex = 100; // 安全指数固定为100%
-      
-      // 设置初始值
-      currentLoad = initialLoad;
-      currentSpeed = initialSpeed;
-      currentDevices = initialDevices;
-      
-      // 初始动画
-      setTimeout(() => {
-        animateValue('systemLoad', 0, initialLoad, 1500, '%');
-      }, 300);
-      
-      setTimeout(() => {
-        animateValue('networkSpeed', 0, initialSpeed, 1800, ' Gbps', true);
-      }, 600);
-      
-      setTimeout(() => {
-        animateValue('connectedDevices', 0, initialDevices, 2200);
-      }, 900);
-      
-      setTimeout(() => {
-        animateValue('securityIndex', 0, securityIndex, 1600, '%');
-      }, 500);
-      
-      // 创建粒子
-      const particlesContainer = document.getElementById('particles');
-      const particleCount = 50;
-      
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
+        <!-- 主内容区域 - 两栏布局 -->
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
+            <!-- 第一栏：个人网站 -->
+            <section class="relative group">
+                <!-- 装饰性边框 -->
+                <div class="absolute -inset-2 border-2 border-cyber-blue rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-glow"></div>
+                
+                <div class="bg-cyber-black/70 backdrop-blur-sm rounded-lg p-6 md:p-8 relative z-10 border border-cyber-blue/30">
+                    <h2 class="text-2xl md:text-3xl font-cyber font-semibold mb-6 text-cyber-blue text-shadow-cyber flex items-center">
+                        个人网站
+                        <span class="ml-2 text-sm px-2 py-1 bg-cyber-blue/20 rounded text-cyber-blue">6个链接</span>
+                    </h2>
+                    
+                    <ul class="space-y-4">
+                        <!-- 个人网站链接1 -->
+                        <li>
+                            <a href="https://wwsh.vvvv.ee/" target="_blank" class="block p-4 bg-gradient-to-r from-cyber-black to-cyber-blue/10 rounded-lg border border-cyber-blue/20 hover:border-cyber-blue transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyber-blue/20 group">
+                                <div class="flex items-center">
+                                    <div>
+                                        <h3 class="font-cyber text-white">MoonTV1官网：密碼123</h3>
+                                        <p class="text-sm text-gray-400">探索视频领域，纵享奇妙之旅</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <!-- 个人网站链接2 -->
+                        <li>
+                            <a href="https://wwsh2.dpdns.org/" target="_blank" class="block p-4 bg-gradient-to-r from-cyber-black to-cyber-purple/10 rounded-lg border border-cyber-purple/20 hover:border-cyber-purple transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyber-purple/20 group">
+                                <div class="flex items-center">
+                                    <div>
+                                        <h3 class="font-cyber text-white">MoonTV官网2</h3>
+                                        <p class="text-sm text-gray-400">探索视频领域，纵享视觉之旅</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <!-- 个人网站链接3 -->
+                        <li>
+                            <a href="http://wwsh1.vvvv.ee/" target="_blank" class="block p-4 bg-gradient-to-r from-cyber-black to-cyber-pink/10 rounded-lg border border-cyber-pink/20 hover:border-cyber-pink transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyber-pink/20 group">
+                                <div class="flex items-center">
+                                    <div>
+                                        <h3 class="font-cyber text-white">龙珠音乐播放器官网1</h3>
+                                        <p class="text-sm text-gray-400">探索音乐领域，纵享听觉之旅</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <!-- 个人网站链接4 -->
+                        <li>
+                            <a href="https://wwsh.imvip.vip/" target="_blank" class="block p-4 bg-gradient-to-r from-cyber-black to-cyber-yellow/10 rounded-lg border border-cyber-yellow/20 hover:border-cyber-yellow transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyber-yellow/20 group">
+                                <div class="flex items-center">
+                                    <div>
+                                        <h3 class="font-cyber text-white">龙珠音乐播放器官网2</h3>
+                                        <p class="text-sm text-gray-400">探索音乐领域，纵享听觉之旅</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <!-- 个人网站链接5 -->
+                        <li>
+                            <a href="https://wwsh2.wuaze.com/" target="_blank" class="block p-4 bg-gradient-to-r from-cyber-black to-cyber-blue/10 rounded-lg border border-cyber-blue/20 hover:border-cyber-blue transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyber-blue/20 group">
+                                <div class="flex items-center">
+                                    <div>
+                                        <h3 class="font-cyber text-white">星际聊天室</h3>
+                                        <p class="text-sm text-gray-400">探索聊天领域，纵享手脑之旅</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <!-- 个人网站链接6 -->
+                        <li>
+                            <a href="contact.html" target="_blank" class="block p-4 bg-gradient-to-r from-cyber-black to-cyber-purple/10 rounded-lg border border-cyber-purple/20 hover:border-cyber-purple transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyber-purple/20 group">
+                                <div class="flex items-center">
+                                    <div>
+                                        <h3 class="font-cyber text-white">联系</h3>
+                                        <p class="text-sm text-gray-400">联系方式与反馈渠道</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 第二栏：好友网站 -->
+            <section class="relative group">
+                <!-- 装饰性边框 -->
+                <div class="absolute -inset-2 border-2 border-cyber-purple rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-glow"></div>
+                
+                <div class="bg-cyber-black/70 backdrop-blur-sm rounded-lg p-6 md:p-8 relative z-10 border border-cyber-purple/30 h-full flex flex-col">
+                    <h2 class="text-2xl md:text-3xl font-cyber font-semibold mb-6 text-cyber-purple text-shadow-purple flex items-center">
+                        好友网站
+                        <span class="ml-2 text-sm px-2 py-1 bg-cyber-purple/20 rounded text-cyber-purple">3个链接</span>
+                    </h2>
+                    
+                    <ul class="space-y-6 flex-grow">
+                        <!-- 好友网站1 -->
+                        <li class="flex-grow">
+                            <a href="https://techcrunch.com" target="_blank" class="h-full flex flex-col justify-between p-6 bg-gradient-to-b from-cyber-black to-cyber-blue/10 rounded-lg border border-cyber-blue/30 hover:border-cyber-blue transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyber-blue/20 group">
+                                <div>
+                                    <h3 class="font-cyber text-xl text-white mb-2">zc科技</h3>
+                                    <p class="text-gray-400">有的人生出就在罗马，有的人出生就是牛马。</p>
+                                </div>
+                                <div class="mt-4 pt-4 border-t border-cyber-blue/20 flex justify-between items-center">
+                                    <span class="text-xs px-2 py-1 bg-cyber-blue/20 rounded-full text-cyber-blue">科技</span>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <!-- 好友网站2 -->
+                        <li class="flex-grow">
+                            <a href="http://tunhs.mysxl.cn/" target="_blank" class="h-full flex flex-col justify-between p-6 bg-gradient-to-b from-cyber-black to-cyber-purple/10 rounded-lg border border-cyber-purple/30 hover:border-cyber-purple transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyber-purple/20 group">
+                                <div>
+                                    <h3 class="font-cyber text-xl text-white mb-2">𝒁𝑰科技</h3>
+                                    <p class="text-gray-400">以“人”为中心，用“连接”打破地域壁垒，让免费网络资源成为全球共享的“通用语言。</p>
+                                </div>
+                                <div class="mt-4 pt-4 border-t border-cyber-purple/20 flex justify-between items-center">
+                                    <span class="text-xs px-2 py-1 bg-cyber-purple/20 rounded-full text-cyber-purple">艺术</span>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <!-- 好友网站3 -->
+                        <li class="flex-grow">
+                            <a href="https://github.com" target="_blank" class="h-full flex flex-col justify-between p-6 bg-gradient-to-b from-cyber-black to-cyber-pink/10 rounded-lg border border-cyber-pink/30 hover:border-cyber-pink transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-cyber-pink/20 group">
+                                <div>
+                                    <h3 class="font-cyber text-xl text-white mb-2">所有网站托管商</h3>
+                                    <p class="text-gray-400">github、vercel、codepen和infinityfree</p>
+                                </div>
+                                <div class="mt-4 pt-4 border-t border-cyber-pink/20 flex justify-between items-center">
+                                    <span class="text-xs px-2 py-1 bg-cyber-pink/20 rounded-full text-cyber-pink">服务</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <!-- 额外的科幻元素装饰 -->
+                    <div class="mt-8 pt-6 border-t border-gray-800 flex justify-center">
+                        <div class="inline-flex space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-cyber-pink animate-pulse"></div>
+                            <div class="w-3 h-3 rounded-full bg-cyber-yellow animate-pulse" style="animation-delay: 0.2s"></div>
+                            <div class="w-3 h-3 rounded-full bg-cyber-blue animate-pulse" style="animation-delay: 0.4s"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
         
-        // 随机属性
-        const size = Math.random() * 3 + 1;
-        const posX = Math.random() * 100;
-        const posY = Math.random() * 100;
-        const duration = Math.random() * 30 + 20;
-        const delay = Math.random() * 10;
-        const opacity = Math.random() * 0.5 + 0.1;
-        
-        // 随机颜色
-        const colors = ['rgba(0, 240, 255, opacity)', 'rgba(157, 78, 221, opacity)', 'rgba(255, 42, 109, opacity)', 'rgba(0, 255, 102, opacity)'];
-        const color = colors[Math.floor(Math.random() * colors.length)].replace('opacity', opacity);
-        
-        // 设置样式
-        particle.style.cssText = `
-          position: absolute;
-          width: ${size}px;
-          height: ${size}px;
-          background: ${color};
-          border-radius: 50%;
-          top: ${posY}%;
-          left: ${posX}%;
-          box-shadow: 0 0 ${size * 3}px ${color};
-          animation: float ${duration}s linear ${delay}s infinite;
-          z-index: 0;
-        `;
-        
-        particlesContainer.appendChild(particle);
-      }
-      
-      // 创建状态图表
-      const ctx = document.getElementById('statusChart').getContext('2d');
-      const initialChartData = Array.from({length: 24}, () => Math.floor(Math.random() * 71) + 10);
-      
-      statusChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: Array(24).fill(''),
-          datasets: [{
-            label: '系统负载',
-            data: initialChartData,
-            borderColor: 'rgba(0, 240, 255, 0.8)',
-            backgroundColor: 'rgba(0, 240, 255, 0.1)',
-            tension: 0.4,
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
+        <!-- 页脚 -->
+        <footer class="mt-16 text-center text-gray-500 text-sm">
+            <div class="inline-block px-6 py-3 border border-cyber-blue/30 rounded-lg bg-cyber-black/50 backdrop-blur-sm">
+                <p>© 2025 工人阶级万岁 | 数字导航系统</p>
+                <p class="mt-1 text-xs">连接现实与虚拟的桥梁</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- 动态粒子背景效果 -->
+    <script>
+        // 创建简单的粒子效果
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                
+                // 随机大小和位置
+                const size = Math.random() * 3 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 20 + 10;
+                
+                // 随机颜色
+                const colors = ['bg-cyber-blue', 'bg-cyber-purple', 'bg-cyber-pink'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // 设置样式
+                particle.className = `fixed rounded-full ${color} opacity-30 pointer-events-none`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animation = `float ${duration}s ease-in-out infinite`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                body.appendChild(particle);
             }
-          },
-          scales: {
-            x: { display: false },
-            y: { display: false, min: 0, max: 100 }
-          },
-          elements: {
-            point: { radius: 0 }
-          },
-          animation: {
-            duration: 2000,
-            easing: 'easeOutQuart'
-          }
-        }
-      });
-      
-      // 设置定时器，每7秒更新一次数值
-      setInterval(updateAllValues, 7000);
-    });
-  </script>
+        });
+    </script>
+<div id="xf-MusicPlayer" data-cdnName="https://player.xfyun.club/js"  data-themeColor="xf-darkGreen" data-bottomHeight="4em"data-fadeOutAutoplay data-memory="1" data-random="true" data-randomSongList="1"></div>
+<script src="https://player.xfyun.club/js/xf-MusicPlayer/js/xf-MusicPlayer.min.js"></script>
+<script src="https://player.xfyun.club/js/yinghua.js"></script>
 </body>
 </html>
+    
